@@ -15,8 +15,10 @@ if __name__ == '__main__':
     Из колоды в 52 карты извлекаются случайным образом 4 карты:
     Найти вероятность, что среди 4-х карт окажется хотя бы один туз.
     '''
-    probability = 0
-    for card in range(1, 5):
-        probability += (comb(4, card) * comb(48, (4-card)))\
-            / comb(52, 4)
+    p1 = (comb(4, 1) * comb(48, 3)) / comb(52, 4)
+    p2 = (comb(4, 2) * comb(48, 2)) / comb(52, 4)
+    p3 = (comb(4, 3) * comb(48, 1)) / comb(52, 4)
+    p4 = comb(4, 4) / comb(52, 4)
+
+    probability = p1 + p2 + p3 + p4
     print(f'Вероятность p = {probability:.4f}')
