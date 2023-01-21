@@ -44,11 +44,11 @@ if __name__ == '__main__':
     n3_2 = n2_2 - n1_2
 
     p1 = probability(n1_1, 2, n2_1, k2_1, n3_1, 0)\
-        * probability(n1_2, 0, n2_2, k2_2, n3_1, 2)
+        * probability(n1_2, 0, n2_2, k2_2, n3_2, 2)
     p2 = probability(n1_1, 1, n2_1, k2_1, n3_1, 1)\
-        * probability(n1_2, 1, n2_2, k2_2, n3_1, 1)
+        * probability(n1_2, 1, n2_2, k2_2, n3_2, 1)
     p3 = probability(n1_1, 0, n2_1, k2_1, n3_1, 2)\
-        * probability(n1_2, 2, n2_2, k2_2, n3_1, 0)
+        * probability(n1_2, 2, n2_2, k2_2, n3_2, 0)
 
     p = p1 + p2 + p3
     print('Вероятность, что ровно два мяча белые равна',
