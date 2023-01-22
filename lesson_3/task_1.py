@@ -42,7 +42,7 @@ def shifted_variance(numbers: numpy.array) -> float:
     '''
     root_mean_square = _root_mean_square(numbers)
 
-    return float(numpy.sqrt(root_mean_square / salary_array.size))
+    return float(root_mean_square / salary_array.size)
 
 
 def unbiased_variance(numbers: numpy.array) -> float:
@@ -52,7 +52,7 @@ def unbiased_variance(numbers: numpy.array) -> float:
     '''
     root_mean_square = _root_mean_square(numbers)
 
-    return float(numpy.sqrt(root_mean_square / (salary_array.size - 1)))
+    return float(root_mean_square / (salary_array.size - 1))
 
 
 if __name__ == '__main__':
@@ -74,8 +74,8 @@ if __name__ == '__main__':
 
     print('Смещенная дисперсия:',
           f'{shifted_variance(salary_array):.1f}')
-    # print(f'Проверка результата: {salary_array.std():.1f}')
+    # print(f'Проверка результата: {salary_array.var():.1f}')
 
     print('Несмещенная дисперсия:',
           f'{unbiased_variance(salary_array):.1f}')
-    # print(f'Проверка результата: {salary_array.std(ddof=1):.1f}')
+    # print(f'Проверка результата: {salary_array.var(ddof=1):.1f}')
