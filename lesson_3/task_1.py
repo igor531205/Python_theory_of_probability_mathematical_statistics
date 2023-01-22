@@ -9,34 +9,22 @@
 import numpy
 
 
-def _sum_numbers(numbers: list) -> float:
-    '''Функция расчета суммы чисел в списке.
+def _root_mean_square(numbers: numpy.array) -> float:
+    '''Функция расчета суммы квадратов отклонений.
     :param array: Список чисел.
-    :return: Сумма чисел в списке.
+    :return: Сумма квадратов отклонений.
     '''
-    amount = 0
-    for number in numbers:
-        amount += number
-    return amount
+    mean_numbers = mean(numbers)
+
+    return float(numpy.sum(numpy.power(numbers - mean_numbers, 2)))
 
 
-def _root_mean_square(numbers: list) -> float:
-    mid = mean(numbers)
-    root_mean_square = 0
-    for number in numbers:
-        root_mean_square +=
-    return
-
-
-def mean(numbers: list) -> float:
+def mean(numbers: numpy.array) -> float:
     '''Функция расчета среднего арифметического.
     :param array: Список чисел.
     :return: Среднее арифметическое.
     '''
-    amount = _sum_numbers(numbers)
-    length = len(numbers)
-
-    return amount / length if length else 0.0
+    return float(numbers.sum() / numbers.size) if numbers.size else 0.0
 
 
 def standard_deviation(numbers: list) -> float:
@@ -44,14 +32,9 @@ def standard_deviation(numbers: list) -> float:
     :param array: Список чисел.
     :return: Среднее квадратичное отклонение.
     '''
-    (np.sum((salaries - salaries_mean)**2) / salaries.size)**0.5
-    (np.sum((salaries - salaries_mean)**2) / salaries.size)**0.5
-    amount = _sum_numbers(numbers)
-    length = len(numbers)
-    for number in numbers:
-        amount += number
+    root_mean_square = _root_mean_square(numbers)
 
-    return amount / length if length else 0.0
+    return float(numpy.sqrt(root_mean_square / salary_array.size))
 
 
 def shifted_variance(numbers: numpy.array) -> float:
@@ -59,38 +42,42 @@ def shifted_variance(numbers: numpy.array) -> float:
     :param array: Список чисел.
     :return: Смещенная дисперсия.
     '''
+    root_mean_square = _root_mean_square(numbers)
 
-    return numpy.sum((numbers - numbers.mean())**2) / numbers.size
+    return float(numpy.sqrt(root_mean_square / salary_array.size))
 
 
-def unbiased_variance(array: numpy.array) -> float:
+def unbiased_variance(numbers: numpy.array) -> float:
     '''Функция расчета несмещенной дисперсии.
-    :param array: Список чисел.    
+    :param numbers: Список чисел.    
     :return: Несмещенная дисперсия.
     '''
-    return 1.0
+    root_mean_square = _root_mean_square(numbers)
+
+    return float(numpy.sqrt(root_mean_square / (salary_array.size - 1)))
 
 
 if __name__ == '__main__':
 
-    salary_array = [100, 80, 75, 77, 89, 33, 45, 25, 65, 17, 30, 24, 57, 55,
-                    70, 75, 65, 84, 90, 150]
+    salary_array = numpy.array([100, 80, 75, 77, 89, 33, 45, 25, 65, 17, 30,
+                                24, 57, 55, 70, 75, 65, 84, 90, 150])
     salary_array.sort()
-    salary_array_np = numpy.array(salary_array)
 
-    print('Даны значения зарплат из выборки выпускников:', *salary_array)
+    print('Зарплаты из выборки выпускников:',
+          *salary_array)
 
-    print('Среднее арифметическое:', mean(salary_array))
-    print('Проверка результата:', salary_array_np.mean())
+    print('Среднее арифметическое:',
+          f'{mean(salary_array):.1f}')
+    # print(f'Проверка результата: {salary_array.mean():.1f}')
 
-    print('Проверка результатов:')
+    print('Среднее квадратичное отклонение:',
+          f'{standard_deviation(salary_array):.1f}')
+    # print(f'Проверка результата: {salary_array.std():.1f}')
 
+    print('Смещенная дисперсия:',
+          f'{shifted_variance(salary_array):.1f}')
+    # print(f'Проверка результата: {salary_array.std():.1f}')
 
-'''
-    print('Смещенная дисперсия:', shifted_variance(salary_array))
-
-    print('Несмещенная дисперсия:', unbiased_variance(salary_array))
-
-    print(numpy.std(salary_array))
-    print(numpy.std(salary_array, ddof=1))
-'''
+    print('Несмещенная дисперсия:',
+          f'{unbiased_variance(salary_array):.1f}')
+    # print(f'Проверка результата: {salary_array.std(ddof=1):.1f}')
